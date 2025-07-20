@@ -10,7 +10,13 @@ const page = () => {
       </div>
 
       {/* Form Builder */}
-      <FormBuilder />
+      <FormBuilder
+        initialData={{
+          title: "",
+          description: "",
+          questions: [],
+        }}
+      />
     </div>
   );
 };

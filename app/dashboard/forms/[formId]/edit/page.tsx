@@ -43,7 +43,13 @@ export default async function EditFormPage({
         </p>
       </div>
 
-      <FormBuilder initialData={form} isEditing />
+      <FormBuilder
+        initialData={{
+          ...form,
+          description: form.description || "",
+        }}
+        isEditing
+      />
     </div>
   );
 }
