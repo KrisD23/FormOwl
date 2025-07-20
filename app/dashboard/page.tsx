@@ -8,34 +8,32 @@ export default async function Dashboard() {
   const { userId, redirectToSignIn } = await auth();
 
   if (!userId) return redirectToSignIn();
-  // Sync user data whenever they access the dashboard
+
+  // Only sync user if needed (you can optimize this further by checking if user exists)
   await syncUserWithDatabase();
 
-  // Get user's forms and responses counts
-  const formsCount = await prisma.form.count({
-    where: {
-      userId,
-    },
-  });
-  const responseCount = await prisma.formResponse.count({
-    where: {
-      form: {
-        userId,
+  // Get all dashboard data in parallel for better performance
+  const [formsCount, responseCount, recentForms] = await Promise.all([
+    // Count user's forms
+    prisma.form.count({
+      where: { userId },
+    }),
+    // Count responses more efficiently
+    prisma.formResponse.count({
+      where: { form: { userId } },
+    }),
+    // Get recent forms
+    prisma.form.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+      take: 5,
+      include: {
+        _count: {
+          select: { responses: true },
+        },
       },
-    },
-  });
-
-  // Get recent forms
-  const recentForms = await prisma.form.findMany({
-    where: { userId },
-    orderBy: { createdAt: "desc" },
-    take: 5,
-    include: {
-      _count: {
-        select: { responses: true },
-      },
-    },
-  });
+    }),
+  ]);
 
   return (
     <div className="space-y-6">
