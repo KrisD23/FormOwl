@@ -271,7 +271,7 @@ const Home = async () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <SignedIn>
+              {session?.user ? (
                 <Button
                   asChild
                   size="lg"
@@ -285,20 +285,18 @@ const Home = async () => {
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-              </SignedIn>
-              <SignedOut>
-                <SignInButton>
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-lg px-8 py-6"
-                  >
-                    <span className="flex items-center">
-                      Start Free Trial
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </span>
-                  </Button>
-                </SignInButton>
-              </SignedOut>
+              ) : (
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-lg px-8 py-6"
+                >
+                  <Link href="/api/auth/signin" className="flex items-center">
+                    Start Free Trial
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         </div>
