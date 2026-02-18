@@ -7,7 +7,7 @@
     "build": "bunx --bun prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "bunx --bun prisma generate"
+    "postinstall": "prisma generate || bunx --bun prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
@@ -26,7 +26,8 @@
     "react-dom": "^19.0.0",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "prisma": "^7.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -36,7 +37,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^16.1.6",
-    "prisma": "^7.4.0",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.2.8",
     "typescript": "^5"

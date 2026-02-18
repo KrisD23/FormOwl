@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
-import React from "react";
 import { auth } from "@/auth";
 import {
   FormInput,
   BarChart3,
-  Lock,
+  Bird,
   Zap,
   Shield,
   ArrowRight,
@@ -51,7 +50,7 @@ const Home = async () => {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
             <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-8">
-              <Lock className="h-4 w-4 mr-2" />
+              <Bird className="h-4 w-4 mr-2" />
               Privacy-first · No sign-in required for respondents
             </div>
 
@@ -173,7 +172,7 @@ const Home = async () => {
             {/* Feature 3 */}
             <Card className="p-8 border-0 shadow-lg bg-gradient-to-br from-purple-50 to-violet-50 hover:shadow-xl transition-all duration-300 group">
               <div className="bg-gradient-to-r from-purple-600 to-violet-600 p-3 rounded-lg w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Lock className="h-8 w-8 text-white" />
+                <Bird className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900">
                 Anonymous Submissions
