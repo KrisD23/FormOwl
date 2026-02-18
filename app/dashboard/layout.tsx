@@ -1,11 +1,12 @@
 import Header from "@/components/layout/header";
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
-  const { userId, redirectToSignIn } = await auth();
+  const session = await auth();
 
-  if (!userId) return redirectToSignIn();
+  if (!session?.user) redirect("/api/auth/signin");
 
   return (
     <div className=" min-h-screenflex flex-col">

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import { UserButton } from "@clerk/nextjs";
+import { auth, signOut } from "@/auth";
 
-const Header = () => {
+const Header = async () => {
+  const session = await auth();
+
   return (
     <header className="bg-background border-b border-gray-200">
       <div className="container flex h-16 items-center justify-between px-4 mx-auto">
@@ -37,7 +39,22 @@ const Header = () => {
           <Button asChild variant="outline">
             <Link href="/dashboard/forms/create">Create Form</Link>
           </Button>
-          <UserButton />
+          {session?.user ? (
+            <form
+              action={async () => {
+                "use server";
+                await signOut({ redirectTo: "/" });
+              }}
+            >
+              <Button type="submit" variant="ghost">
+                Sign Out
+              </Button>
+            </form>
+          ) : (
+            <Button asChild>
+              <Link href="/api/auth/signin">Sign In</Link>
+            </Button>
+          )}
         </div>
       </div>
     </header>

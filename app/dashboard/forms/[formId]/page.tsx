@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -16,10 +16,11 @@ export default async function FormDetailsPage({
 }: {
   params: Promise<{ formId: string }>;
 }) {
-  const { userId, redirectToSignIn } = await auth();
+  const session = await auth();
+  const userId = session?.user?.id;
   const { formId } = await params;
 
-  if (!userId) return redirectToSignIn();
+  if (!userId) redirect("/api/auth/signin");
 
   const form = await prisma.form.findUnique({
     where: {

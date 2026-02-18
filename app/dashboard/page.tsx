@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { syncUserWithDatabase } from "@/lib/clerk-sync";
+import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default async function Dashboard() {
-  const { userId, redirectToSignIn } = await auth();
+  const session = await auth();
+  const userId = session?.user?.id;
 
-  if (!userId) return redirectToSignIn();
-
-  // Only sync user if needed (you can optimize this further by checking if user exists)
-  await syncUserWithDatabase();
+  if (!userId) redirect("/api/auth/signin");
 
   // Get all dashboard data in parallel for better performance
   const [formsCount, responseCount, recentForms] = await Promise.all([

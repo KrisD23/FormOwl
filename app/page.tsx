@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import React from "react";
-import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { auth } from "@/auth";
 import {
   FormInput,
   BarChart3,
@@ -15,7 +15,8 @@ import {
   Star,
 } from "lucide-react";
 
-const Home = () => {
+const Home = async () => {
+  const session = await auth();
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       {/* Header */}
@@ -30,18 +31,18 @@ const Home = () => {
             </h1>
           </div>
           <div>
-            <SignedOut>
-              <SignInButton>
-                <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
-                  Sign in
-                </Button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
+            {session?.user ? (
               <Button asChild variant="outline" className="mr-2">
                 <Link href="/dashboard">Dashboard</Link>
               </Button>
-            </SignedIn>
+            ) : (
+              <Button
+                asChild
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+              >
+                <Link href="/api/auth/signin">Sign in</Link>
+              </Button>
+            )}
           </div>
         </div>
       </header>
@@ -66,7 +67,7 @@ const Home = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <SignedIn>
+              {session?.user ? (
                 <Button
                   asChild
                   size="lg"
@@ -80,20 +81,18 @@ const Home = () => {
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-              </SignedIn>
-              <SignedOut>
-                <SignInButton>
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-lg px-8 py-6"
-                  >
-                    <span className="flex items-center">
-                      Get Started Free
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </span>
-                  </Button>
-                </SignInButton>
-              </SignedOut>
+              ) : (
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-lg px-8 py-6"
+                >
+                  <Link href="/api/auth/signin" className="flex items-center">
+                    Get Started Free
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              )}
 
               <Button variant="outline" size="lg" className="text-lg px-8 py-6">
                 Watch Demo

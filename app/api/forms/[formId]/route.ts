@@ -1,12 +1,13 @@
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
 export async function PUT(
   req: Request,
   { params }: { params: Promise<{ formId: string }> },
 ) {
-  const { userId } = await auth();
+  const session = await auth();
+  const userId = session?.user?.id;
   const { formId } = await params;
 
   if (!userId) {
@@ -72,7 +73,8 @@ export async function DELETE(
   req: Request,
   { params }: { params: Promise<{ formId: string }> },
 ) {
-  const { userId } = await auth();
+  const session = await auth();
+  const userId = session?.user?.id;
   const { formId } = await params;
 
   if (!userId) {

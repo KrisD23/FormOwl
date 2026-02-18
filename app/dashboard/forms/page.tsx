@@ -1,11 +1,13 @@
 import FormList from "@/components/form/form-list";
+import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export default async function FormPage() {
-  const { userId, redirectToSignIn } = await auth();
+  const session = await auth();
+  const userId = session?.user?.id;
 
-  if (!userId) return redirectToSignIn();
+  if (!userId) redirect("/api/auth/signin");
 
   const forms = await prisma.form.findMany({
     where: {
