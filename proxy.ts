@@ -25,3 +25,5 @@ export const config = {
     "/(api|trpc)(.*)",
   ],
 };
+
+export { auth as proxy } from "@/auth";
