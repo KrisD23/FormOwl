@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { syncUserWithDatabase } from "@/lib/clerk-sync";
-import prisma from "@/lib/db";
+import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 

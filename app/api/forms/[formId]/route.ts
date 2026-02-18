@@ -1,10 +1,10 @@
-import prisma from "@/lib/db";
+import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 export async function PUT(
   req: Request,
-  { params }: { params: Promise<{ formId: string }> }
+  { params }: { params: Promise<{ formId: string }> },
 ) {
   const { userId } = await auth();
   const { formId } = await params;
@@ -70,7 +70,7 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ formId: string }> }
+  { params }: { params: Promise<{ formId: string }> },
 ) {
   const { userId } = await auth();
   const { formId } = await params;

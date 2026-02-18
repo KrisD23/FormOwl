@@ -1,5 +1,5 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
-import prisma from "./db";
+import prisma from "./prisma";
 import type { User } from "./generated/prisma";
 
 // Simple in-memory cache for user sync (you could use Redis in production)

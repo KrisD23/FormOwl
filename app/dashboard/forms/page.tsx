@@ -1,5 +1,5 @@
 import FormList from "@/components/form/form-list";
-import prisma from "@/lib/db";
+import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
 export default async function FormPage() {

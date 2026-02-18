@@ -1,6 +1,6 @@
 import FormResponse from "@/components/form/form-response";
 import { Button } from "@/components/ui/button";
-import prisma from "@/lib/db";
+import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";

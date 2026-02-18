@@ -1,5 +1,5 @@
 import FormPreview from "@/components/form/form-preview";
-import prisma from "@/lib/db";
+import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
 export default async function PublicFormPage({

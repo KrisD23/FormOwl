@@ -1,5 +1,5 @@
 import FormBuilder from "@/components/form/form-builder";
-import prisma from "@/lib/db";
+import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
