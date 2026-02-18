@@ -11,7 +11,7 @@ const Header = async () => {
       <div className="container flex h-16 items-center justify-between px-4 mx-auto">
         <div className="flex items-center gap-6">
           <Link href="/" className="font-bold text-2xl">
-            Form Builder
+            FormOwl
           </Link>
           <nav className="hidden md:flex">
             <ul className="flex items-center gap-3 ">

@@ -36,8 +36,10 @@ export default async function Dashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">welcome, John</h1>
-        <p className="text-gray-500 mt-1">manage your forms and responses</p>
+        <h1 className="text-3xl font-bold">
+          Welcome back{session?.user?.name ? `, ${session.user.name}` : ""}
+        </h1>
+        <p className="text-gray-500 mt-1">Manage your forms and responses</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">

@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Form Builder App",
-  description: "Create and share forms with ease.",
+  title: "FormOwl — Anonymous Form Builder",
+  description:
+    "Create and share forms publicly. Collect anonymous responses without requiring respondents to sign in.",
 };
 
 export default function RootLayout({
